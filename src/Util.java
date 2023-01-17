@@ -1,13 +1,16 @@
 import java.util.Scanner;
 
+
 public class Util {
+    public static final String ANSI_RESET="\u001B[0m";
+    public static final String RED_BOLD = "\033[1;31m";    // RED
     public static int demanarInteger(String frase){
         int num;
         Scanner in = new Scanner(System.in);
         System.out.print(frase);
         while(!in.hasNextInt()){
             in.next();
-            System.out.print("Error! Introdueix un valor enter: ");
+            System.out.print(RED_BOLD + "Error!" + ANSI_RESET + " Introdueix un valor enter: ");
         }
         num=in.nextInt();
         return num;
@@ -19,10 +22,10 @@ public class Util {
         do {
             while(!in.hasNextInt()){
                 in.next();
-                System.out.print("Error! Introdueix un valor enter: ");
+                System.out.print(RED_BOLD + "Error!" + ANSI_RESET + " Introdueix un valor enter: ");
             }num=in.nextInt();
             if (num<min || num>max) {
-                System.out.printf("Error! Introdueix un valor entre %d i %d: ",min,max);
+                System.out.printf(RED_BOLD + "Error!" + ANSI_RESET + " Introdueix un valor entre %d i %d: ",min,max);
             }
         }while (num<min || num>max);
         return num;
@@ -33,7 +36,7 @@ public class Util {
         System.out.print(frase);
         while(!in.hasNextDouble()){
             in.next();
-            System.out.print("Error! Introdueix un valor decimal: ");
+            System.out.print(RED_BOLD + "Error!" + ANSI_RESET + " Introdueix un valor decimal: ");
         }
         num=in.nextInt();
         return num;
@@ -44,7 +47,7 @@ public class Util {
         char caracter = in.next().charAt(0);
         caracter=Character.toLowerCase(caracter);
         while(caracter !=c1 && caracter != c2){
-            System.out.printf("Error, introdueix %c/%c: ",c1,c2);
+            System.out.printf(RED_BOLD + "Error!" + ANSI_RESET + " Introdueix %c/%c: ",c1,c2);
             caracter= in.next().charAt(0);
             caracter=Character.toLowerCase(caracter);
         }
