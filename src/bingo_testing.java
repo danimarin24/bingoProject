@@ -110,13 +110,6 @@ public class bingo_testing {
         }
     }
 
-    // alomejor no es necesario
-    /*
-    private static String convertIntToString(int num) {
-        return "" + num;
-    }
-     */
-
     private static void printCards(String[][][] arr) {
         System.out.println("CARTONES");
         // IMPRIMIR LOS CARTONES
@@ -130,23 +123,4 @@ public class bingo_testing {
             System.out.println();
         }
     }
-
-    // alomejor no es necesario
-    /*
-    private static boolean checkRandomNumberString(String num, String[][] arr) {
-        boolean repeated = false;
-
-        for (String[] string : arr) {
-            for (String s : string) {
-                if (num.equals(s)) {
-                    repeated = true;
-                    break;
-                }
-            }
-        }
-
-        return repeated;
-    }
-
-     */
 }
