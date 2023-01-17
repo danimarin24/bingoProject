@@ -1,16 +1,15 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class bingo_testing {
     public static final String at = "@";
 
 
     // Metode principal
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        // número de cartones
-        int cardsNumber = 2;
+        int cardsNumber = Util.demanarIntegerMinMax("Numero de cartons: ", 1, 99);;
 
         String[][][] cards = new String[cardsNumber][3][9];
         int[][][] cardsColumns = new int[cardsNumber][9][3];
@@ -29,7 +28,7 @@ public class bingo_testing {
     }
 
     private static void getRandomValues(String[][][] cards, int[][][] cardsColumns) {
-        int aux, minRange, maxRange, range, rand, randomNum;
+        int aux, minRange, maxRange, range, randomNum;
         boolean checked = false;
         for (int x = 0; x < cards.length; x++) {
             for (int y = 0; y < cards[x].length; y++) {
@@ -92,7 +91,6 @@ public class bingo_testing {
 
     private static void fillCardsAt(String[][][] arr) {
         int counter = 0, atPosition;
-        String stringAtPosition;
 
         for (int x = 0; x < arr.length; x++) {
             for (int y = 0; y < arr[x].length; y++) {
