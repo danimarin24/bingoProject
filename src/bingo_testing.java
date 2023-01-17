@@ -68,8 +68,8 @@ public class bingo_testing {
     private static void sortCards(String[][][] cards, int[][][] cardsColumns) {
         for (int x = 0; x < cards.length; x++) {
             for (int y = 0; y < cards[x].length; y++) {
-                for (int z = 0; z <= cards[x][y].length; z++) {
-                    Arrays.sort(cardsColumns[x][y]);
+                for (int z = 0; z < cards[x][y].length; z++) {
+                    Arrays.sort(cardsColumns[x][z]);
                 }
             }
         }
