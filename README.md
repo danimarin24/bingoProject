@@ -4,24 +4,37 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project has been created in the institute Carles Vallbona by the student Daniel Marín Bocanegra, during a week we had to create a game that simulates through the terminal the traditional bingo.
+This project has been created by the student Daniel Marín Bocanegra in a project for DAM/DMA (Development of Multiplatform Applications).
+
+The project consisted of creating the famous video game 'bingo', a very popular game here in Spain.
+
+In the following sections I will detail what points I had to complete in order to get this project done, and I will also include my grade at the end so you can see a complete evaluation.
+
 
 ### Built With
 
-This project was created with full native Java language, withoy any frameworks. Only using the oficial documentation of Java.
+This project was created with native Java language, without frameworks. Using only the official Java documentation below.
 
-* [![Java][Java]][Java-url]
+It has been created completely from scratch, with the creation of different methods to make a cleaner and visual code, while modular and scalable.
+
+[![Java][Java]][Java-url]
 
 <!-- ROADMAP -->
 ## Roadmap
-- [x] Add ................
-- [ ] Add ................
-- [ ] Add ................
-- [ ] Add ................
-- [ ] x
-    - [ ] x
-    - [ ] x
-- [ ] Create all the documentation
+- [ ] Add a method to ask the number of cartons to play. [not specified]
+- [x] Add an array with 3 rows and 9 columns x bingo card. [not specified]
+- [x] Add a method to fill all the rows with 4 zeros randomly. [not specified]
+- [x] Add a method to print bingo cards into the terminal. [1.5 points]
+- [ ] Add a method to draw balls from 1 to 90, and check if that number (ball) is in any of the cards, if so, put a dash. [1.5 points]
+- [ ] Add a method to check if the cards have a bingo, and print it by terminal. Also, print all the numbers that have been coming up. [1 point]
+- [ ] Add a question every time a number is drawn. [1 points]
+- [ ] Improvements [TOTAL: 5 extra points]
+  - [x] Replace randomly generated zeros by a '@'. [0.5 points]
+  - [ ] Add a method to display all the numbers that have been drawn, and display those that have matched the winning card. [0.5 points]
+  - [ ] Add a method to check if the cartons have a line, and print it per terminal, only once. [1 point]
+  - [x] All cards must have 5 numbers and 4 holes per row. [1.5 points]
+  - [x] The player can play with 2 or more cards at the same time. [1.5 points]
+- [ ] Create all documentation and generate the JavaDoc. [not specified]
 
 
 <!-- CONTACT -->
@@ -34,16 +47,13 @@ Project Link: [https://github.com/danimarin24/bingoProject](https://github.com/d
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+In this section I will leave websites that have been useful to me when creating this project, and any resource that I have found interesting, and has helped me.
+* [-](https://)
+* [-](https://)
+* [-](https://)
+* [-](https://)
+* [-](https://)
+* [-](https://)
 
 [contributors-shield]: https://img.shields.io/github/contributors/danimarin24/bingoProject?color=green&style=for-the-badge
 [contributors-url]: https://github.com/danimarin24/bingoProject/graphs/contributors
