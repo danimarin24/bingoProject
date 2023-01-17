@@ -4,66 +4,90 @@ import java.util.Scanner;
 public class bingo_testing {
     public static final String at = "@";
 
+
     // Metode principal
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-
-        int randomNum;
-        String stringRandomNum;
-        int cardsNumber = 3;
+        // número de cartones
+        int cardsNumber = 2;
 
         String[][][] cards = new String[cardsNumber][3][9];
-        int[][] cardV2 = new int[cardsNumber][27];
-
-        boolean checked = false;
+        int[][][] cardsColumns = new int[cardsNumber][9][3];
 
         System.out.println("ejecutandose");
-        int aux;
+        getRandomValues(cards, cardsColumns);
+        System.out.println("ejecutandose");
+        sortCards(cards, cardsColumns);
+        System.out.println("ejecutandose");
+        fillCardsSorted(cards, cardsColumns);
+        System.out.println("ejecutandose");
+        fillCardsAt(cards);
+        System.out.println("ejecutandose");
+        printCards(cards);
+        System.out.println("ejecutandose");
+    }
+
+    private static void getRandomValues(String[][][] cards, int[][][] cardsColumns) {
+        int aux, minRange, maxRange, range, rand, randomNum;
+        boolean checked = false;
         for (int x = 0; x < cards.length; x++) {
             for (int y = 0; y < cards[x].length; y++) {
                 aux = 1;
                 for (int z = 0; z < cards[x][y].length; z++) {
-                    System.out.println(z);
-                    int max = 10;
-                    int min = 1;
-                    int range = max - min + 1;
-                    int rand = (int)(Math.random() * range) + min;
-                    System.out.println(rand);
-                    System.out.println((int) (Math.random()*9+(aux*10)));
-                    aux++;
-
-                    /*
+                    maxRange = (aux <= 8) ? (aux * 10 - 1) : (aux * 10);
+                    minRange = (aux == 1) ? 1 : (aux * 10 - 10);
+                    range = maxRange - minRange + 1;
                     do {
-                        randomNum = (int) (Math.random()*90+1);
-                        stringRandomNum = convertIntToString(randomNum);
-                        checked = checkRandomNumber(stringRandomNum, cards[x]);
-                    } while (checked);
-                    cards[x][y][z] = stringRandomNum;
+                        randomNum = (int)(Math.random() * range) + minRange;
+                        //System.out.printf("z = %d || min = %d || max = %d || rango = %d || random = %d \n", z, minRange, maxRange, range, randomNum);
 
-                    System.out.printf("%3s", cards[x][y][z]);
-                     */
+                        checked = checkRandomNumberInt(randomNum, cardsColumns[x]);
+                    } while (checked);
+                    cardsColumns[x][z][y] = randomNum;
+
+                    aux++;
                 }
             }
         }
+    }
 
-
-
+    // RELLENAR EL ARRAY DE STRINGS
+    private static void fillCardsSorted(String[][][] cards, int[][][] cardsColumns) {
         for (int x = 0; x < cards.length; x++) {
             for (int y = 0; y < cards[x].length; y++) {
-                for (int z = 0; z < cards[x][y].length; z++){
-                    do {
-                        randomNum = (int) (Math.random()*90+1);
-                        stringRandomNum = convertIntToString(randomNum);
-                        checked = checkRandomNumber(stringRandomNum, cards[x]);
-                    } while (checked);
-                    cards[x][y][z] = stringRandomNum;
+                for (int z = 0; z < cards[x][y].length; z++) {
+                    cards[x][y][z] = String.valueOf(cardsColumns[x][z][y]);
                 }
             }
         }
-        fillCardsAt(cards);
-        printCards(cards);
-        System.out.println("ejecutandose");
+
+    }
+
+    // ORDENAR LOS CARTONES
+    private static void sortCards(String[][][] cards, int[][][] cardsColumns) {
+        for (int x = 0; x < cards.length; x++) {
+            for (int y = 0; y < cards[x].length; y++) {
+                for (int z = 0; z <= cards[x][y].length; z++) {
+                    Arrays.sort(cardsColumns[x][y]);
+                }
+            }
+        }
+    }
+
+    private static boolean checkRandomNumberInt(int num, int[][] arr) {
+        boolean repeated = false;
+
+        for (int[] ints : arr) {
+            for (int anInt : ints) {
+                if (num == anInt) {
+                    repeated = true;
+                    break;
+                }
+            }
+        }
+
+        return repeated;
     }
 
     private static void fillCardsAt(String[][][] arr) {
@@ -86,15 +110,30 @@ public class bingo_testing {
         }
     }
 
+    // alomejor no es necesario
+    /*
     private static String convertIntToString(int num) {
         return "" + num;
     }
+     */
 
     private static void printCards(String[][][] arr) {
         System.out.println("CARTONES");
+        // IMPRIMIR LOS CARTONES
+        for (String[][] strings : arr) {
+            for (String[] string : strings) {
+                for (String s : string) {
+                    System.out.printf("%2s ", s);
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
     }
 
-    private static boolean checkRandomNumber(String num, String[][] arr) {
+    // alomejor no es necesario
+    /*
+    private static boolean checkRandomNumberString(String num, String[][] arr) {
         boolean repeated = false;
 
         for (String[] string : arr) {
@@ -108,4 +147,6 @@ public class bingo_testing {
 
         return repeated;
     }
+
+     */
 }
