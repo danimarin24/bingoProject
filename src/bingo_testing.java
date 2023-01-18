@@ -39,8 +39,6 @@ public class bingo_testing {
 
                 generateAllCards(cards, cardsColumns);
 
-
-
                 getBomboNumbers(1, 90, cards, cardsColumns);
 
             } else {
@@ -78,12 +76,33 @@ public class bingo_testing {
 
 
             searchAndReplaceValue(arrBomboNumbers[aux], cards);
+            checkLine(cards);
 
             // incrementar posición del nuevo número;
             aux++;
         }while (Util.demanarChar("Next Number", 's', 'n') == 's');
 
 
+    }
+
+    private static void checkLine(String[][][] cards) {
+        int aux;
+        for (int x = 0; x < cards.length; x++) {
+            for (int y = 0; y < cards[x].length; y++) {
+                aux = 0;
+                for (int z = 0; z < cards[x][y].length; z++) {
+                    if (aux < 4) {
+                        if (cards[x][y][z].equals(hyphen)) {
+                            aux++;
+                        }
+                        if (aux == 4) {
+                            System.out.println("LINEA");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
