@@ -59,11 +59,17 @@ public class bingo_testing {
     }
 
     private static void getBomboNumbers(int min, int max, String[][][] cards, int[][][] cardsColumns) {
+        generateAllCards(cards, cardsColumns);
+
+
+        printCards(cards);
+    }
+
+    private static void generateAllCards(String[][][] cards, int[][][] cardsColumns) {
         getRandomValues(cards, cardsColumns);
         sortCards(cards, cardsColumns);
         fillCardsSorted(cards, cardsColumns);
         fillCardsAt(cards);
-        printCards(cards);
     }
 
     private static void getRandomValues(String[][][] cards, int[][][] cardsColumns) {
