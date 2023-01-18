@@ -41,9 +41,9 @@ public class Util {
         num=in.nextInt();
         return num;
     }
-    public static char demanarChar(char c1, char c2){
+    public static char demanarChar(String frase, char c1, char c2){
         Scanner in = new Scanner(System.in);
-        System.out.print("Següent número (s/n)?: ");
+        System.out.printf("%s (%c/%c)?: ", frase, c1, c2);
         char caracter = in.next().charAt(0);
         caracter=Character.toLowerCase(caracter);
         while(caracter !=c1 && caracter != c2){

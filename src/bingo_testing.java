@@ -1,30 +1,69 @@
-import java.util.Arrays;
-import java.util.Scanner;
-
+import java.util.*;
 
 public class bingo_testing {
+    public static final String ANSI_RESET="\u001B[0m";
+    public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
+
     public static final String at = "@";
+    public static boolean finished = false;
 
 
     // Metode principal
     public static void main(String[] args) {
 
-        int cardsNumber = Util.demanarIntegerMinMax("Numero de cartons: ", 1, 99);;
+        game();
 
-        String[][][] cards = new String[cardsNumber][3][9];
-        int[][][] cardsColumns = new int[cardsNumber][9][3];
 
-        System.out.println("ejecutandose");
+
+    }
+
+    private static void game() {
+        int cardsNumber;
+        String[][][] cards;
+        int[][][] cardsColumns;
+        boolean character;
+        // PRINT WELCOME MESSAGE
+        getGameInfo();
+        do {
+            if (Util.demanarChar("Do you want to play bingo?", 's', 'n') == 's') {
+                cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, 99);
+                cards = new String[cardsNumber][3][9];
+                cardsColumns = new int[cardsNumber][9][3];
+                getBomboNumbers(1, 90, cards, cardsColumns);
+
+            } else {
+                System.out.println("BYE!! See u soon :D");
+                finished = false;
+            }
+
+
+
+
+
+
+        } while (finished);
+    }
+
+    private static void getGameInfo() {
+        System.out.printf("""
+                        %s⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜%s
+                        %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s %sBINGO%s %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s
+                        %s⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜%s
+                        """,
+                CYAN_BOLD, ANSI_RESET,
+                RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET,
+                CYAN_BOLD, ANSI_RESET
+        );
+    }
+
+    private static void getBomboNumbers(int min, int max, String[][][] cards, int[][][] cardsColumns) {
         getRandomValues(cards, cardsColumns);
-        System.out.println("ejecutandose");
         sortCards(cards, cardsColumns);
-        System.out.println("ejecutandose");
         fillCardsSorted(cards, cardsColumns);
-        System.out.println("ejecutandose");
         fillCardsAt(cards);
-        System.out.println("ejecutandose");
         printCards(cards);
-        System.out.println("ejecutandose");
     }
 
     private static void getRandomValues(String[][][] cards, int[][][] cardsColumns) {
@@ -34,7 +73,7 @@ public class bingo_testing {
             for (int y = 0; y < cards[x].length; y++) {
                 aux = 1;
                 for (int z = 0; z < cards[x][y].length; z++) {
-                    maxRange = (aux <= 8) ? (aux * 10 - 1) : (aux * 10);
+                    maxRange = (aux < 9) ? (aux * 10 - 1) : (aux * 10);
                     minRange = (aux == 1) ? 1 : (aux * 10 - 10);
                     range = maxRange - minRange + 1;
                     do {
