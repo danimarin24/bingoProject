@@ -219,6 +219,12 @@ public class bingo_testing {
         return repeated;
     }
 
+    /**
+     * Método para sustituir números al azar del cartón
+     * por un @, y así darle 4 huecos por fila
+     * al cartón, y que sea igual al del juego original.
+     * @param arr
+     */
     private static void fillCardsAt(String[][][] arr) {
         int counter = 0, atPosition;
 
@@ -238,6 +244,12 @@ public class bingo_testing {
         }
     }
 
+    /**
+     * Método para imprimir los cartones,
+     * dentro del método se llama al método {@linkplain  #printColor},
+     * para estilizar los cartones.
+     * @param arr
+     */
     private static void printCards(String[][][] arr) {
         System.out.println();
         for (String[][] strings : arr) {
@@ -257,6 +269,16 @@ public class bingo_testing {
         }
     }
 
+    /**
+     * Método para imprimir por pantalla con colores de fondo
+     * en los parámetros se recibe el color de fondo
+     * el color del texto, el color de reset
+     * y el texto que estará estilizado.
+     * @param bgColor
+     * @param color
+     * @param reset
+     * @param text
+     */
     private static void printColor(String bgColor, String color, String reset, String text) {
         System.out.printf(bgColor + color + "%2s " + reset, text);
     }
