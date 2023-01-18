@@ -21,11 +21,7 @@ public class bingo_testing {
 
     // Metode principal
     public static void main(String[] args) {
-
         game();
-
-
-
     }
 
     private static void game() {
