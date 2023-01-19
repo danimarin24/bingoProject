@@ -33,43 +33,58 @@ public class bingo_testing {
      * @param args
      */
     public static void main(String[] args) {
-
-        game();
-
-
-
-    }
-
-    private static void game() {
-        int cardsNumber;
-        String[][][] cards;
-        int[][][] cardsColumns;
-        boolean character;
-        // PRINT WELCOME MESSAGE
-        getGameInfo();
         do {
+            // PRINT WELCOME MESSAGE
+            getGameInfo();
             if (Util.demanarChar("Do you want to play bingo?", 's', 'n') == 's') {
-                cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, 99);
-                cards = new String[cardsNumber][3][9];
-                cardsColumns = new int[cardsNumber][9][3];
-
-                generateAllCards(cards, cardsColumns);
-
-
-
-                getBomboNumbers(1, 90, cards, cardsColumns);
-
-            } else {
+                game();
+            } else { // if the user input 'n', the game ends
                 System.out.println("BYE!! See u soon :D");
                 finished = false;
             }
-
-
-
-
-
-
         } while (finished);
+    }
+
+    /**
+     * Método para jugar al juego BINGO
+     * en este método comienzan todas las llamadas
+     * a todos los métodos que hay en esta clase.
+     * Este método utiliza internamente estos métodos
+     * @method {@link Util#demanarChar}
+     * @method {@link Util#demanarIntegerMinMax}
+     * @method {@link #generateAllCards}
+     * @method {@link #printCards}
+     * @method {@link #generateBomboArray}
+     * @method {@link #checkLine}
+     * @method {@link #searchAndReplaceValue}
+     */
+    private static void game() {
+        int cardsNumber, aux = 0;
+        String[][][] cards;
+        int[][][] cardsColumns;
+        boolean checkLine = false, checkBingo = false;
+        int[] arrBomboNumbers = generateBomboArray(1, 90);
+
+        cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, 99);
+        cards = new String[cardsNumber][3][9];
+        cardsColumns = new int[cardsNumber][9][3];
+
+        generateAllCards(cards, cardsColumns);
+
+        // start game with cards generated
+        do { // only play if the user input 's', if not the game ends.
+            printCards(cards); // print cards every time
+
+            System.out.printf("%sNew number: %d%s\n", GREEN_BACKGROUND_BRIGHT + BLACK_BOLD, arrBomboNumbers[aux], ANSI_RESET);
+
+            searchAndReplaceValue(arrBomboNumbers[aux], cards); // change number value with a hyphen every time
+            if (!checkLine) {
+                checkLine = checkLine(cards); // check line every time, until it is
+            }
+
+            // incrementar posición del nuevo número del bombo;
+            aux++;
+        }while (Util.demanarChar("Next Number", 's', 'n') == 's');
     }
 
     /**
@@ -88,41 +103,6 @@ public class bingo_testing {
                 RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET,
                 CYAN_BOLD, ANSI_RESET
         );
-    }
-
-    /**
-     * Método para ir imprimiendo los números del bombo
-     * a medida que el jugar quiere seguir jugando al bingo.
-     * Este método utiliza internamente tres métodos más
-     * método para generar los números del bombo en un array: {@link #generateBomboArray}
-     * método para imprimir los cartones actuales: {@link #printCards}
-     * método para buscar si el número actual se encuentra en
-     * un cartón, y sustituirlo: {@link #searchAndReplaceValue}
-     * @param min
-     * @param max
-     * @param cards
-     * @param cardsColumns
-     */
-    private static void getBomboNumbers(int min, int max, String[][][] cards, int[][][] cardsColumns) {
-        int aux = 0;
-        boolean checkLine = false;
-        int[] arrBomboNumbers = generateBomboArray(min, max);
-        do {
-            printCards(cards);
-
-            System.out.printf("%sNew number: %d%s\n", GREEN_BACKGROUND_BRIGHT + BLACK_BOLD, arrBomboNumbers[aux], ANSI_RESET);
-
-
-            searchAndReplaceValue(arrBomboNumbers[aux], cards);
-            if (!checkLine) {
-                checkLine = checkLine(cards);
-            }
-
-            // incrementar posición del nuevo número;
-            aux++;
-        }while (Util.demanarChar("Next Number", 's', 'n') == 's');
-
-
     }
 
     /**
