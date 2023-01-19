@@ -145,7 +145,7 @@ public class bingo_testing {
      * @return
      */
     private static boolean checkBingo(String[][][] arr) {
-        int aux;
+        int aux, auxBingo = 0;
         for (int x = 0; x < arr.length; x++) {
             aux = 0;
             for (int y = 0; y < arr[x].length; y++) {
@@ -157,13 +157,13 @@ public class bingo_testing {
                         if (aux == 15) {
                             System.out.println();
                             System.out.printf("%sThere is a BINGO on card %s%s\n", BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, x + 1, ANSI_RESET);
-                            return true;
+                            auxBingo++;
                         }
                     }
                 }
             }
         }
-        return false;
+        return auxBingo > 0;
     }
 
     /**
@@ -369,15 +369,19 @@ public class bingo_testing {
      */
     private static void printCards(String[][][] arr) {
         System.out.println();
-        for (String[][] strings : arr) {
-            for (String[] string : strings) {
-                for (String s : string) {
-                    if (s.equals(at)) {
-                        printColor(WHITE_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, s);
-                    } else if (s.equals(hyphen)) {
-                        printColor(YELLOW_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, s);
+
+        for (int x = 0; x < arr.length; x++) {
+            System.out.printf("%4s ", (x+1) + ".");
+            for (int y = 0; y < arr[x].length; y++) {
+                for (int z = 0; z < arr[x][y].length; z++){
+                    if (y == 1 && z == 0) System.out.printf("%4s ", ' ');
+                    if (y == 2 && z == 0) System.out.printf("%4s ", ' ');
+                    if (arr[x][y][z].equals(at)) {
+                        printColor(WHITE_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y][z]);
+                    } else if (arr[x][y][z].equals(hyphen)) {
+                        printColor(YELLOW_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y][z]);
                     } else {
-                        printColor(RED_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, s);
+                        printColor(RED_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y][z]);
                     }
                 }
                 System.out.println();
