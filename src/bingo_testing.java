@@ -4,7 +4,6 @@ public class bingo_testing {
     public static final String ANSI_RESET="\u001B[0m";
     public static final String RED_BOLD = "\033[1;31m";    // RED
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
-    public static final String RED_BOLD = "\033[1;31m";    // RED
     public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
     public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
     public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
@@ -33,11 +32,11 @@ public class bingo_testing {
      * @param args
      */
     public static void main(String[] args) {
+        // PRINT WELCOME MESSAGE
+        getGameInfo();
         do {
-            // PRINT WELCOME MESSAGE
-            getGameInfo();
             if (Util.demanarChar("Do you want to play bingo?", 's', 'n') == 's') {
-                game();
+                finished = game();
             } else { // if the user input 'n', the game ends
                 System.out.println("BYE!! See u soon :D");
                 finished = false;
@@ -58,7 +57,7 @@ public class bingo_testing {
      * @method {@link #checkLine}
      * @method {@link #searchAndReplaceValue}
      */
-    private static void game() {
+    private static boolean game() {
         int cardsNumber, aux = 0;
         String[][][] cards;
         int[][][] cardsColumns;
@@ -83,12 +82,13 @@ public class bingo_testing {
             }
 
             if (checkBingo(cards)) { // check bingo every time, until it is
-                break;
+                return true;
             }
 
             // incrementar posición del nuevo número del bombo;
             aux++;
         }while (Util.demanarChar("Next Number", 's', 'n') == 's');
+        return false;
     }
 
     /**
