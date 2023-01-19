@@ -161,19 +161,19 @@ public class bingo_testing {
      * @void Imprime si se tiene el valor buscado, y si lo ha reemplazado
      */
     private static void searchAndReplaceValue(int num, String[][][] arr) {
-        boolean isIn = false;
-        int position;
+        int position, aux = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                isIn = Arrays.asList(arr[i][j]).contains(String.valueOf(num));
-                if (isIn) {
-                    System.out.println("You had this number, I mark it with a hyphen. " + YELLOW_BACKGROUND_BRIGHT + BLACK_BOLD + "[-]" + ANSI_RESET);
+                if (Arrays.asList(arr[i][j]).contains(String.valueOf(num))) {
+                    aux++;
                     position = Arrays.asList(arr[i][j]).indexOf(String.valueOf(num));
                     arr[i][j][position] = hyphen;
                     break;
                 }
             }
         }
+        if (aux > 1) System.out.println("You had this number in one of your cards,\nI mark it with a hyphen. " + YELLOW_BACKGROUND_BRIGHT + BLACK_BOLD + "[-]" + ANSI_RESET);
+
     }
 
     /**
