@@ -82,6 +82,10 @@ public class bingo_testing {
                 checkLine = checkLine(cards); // check line every time, until it is
             }
 
+            if (checkBingo(cards)) { // check bingo every time, until it is
+                break;
+            }
+
             // incrementar posición del nuevo número del bombo;
             aux++;
         }while (Util.demanarChar("Next Number", 's', 'n') == 's');
@@ -109,21 +113,50 @@ public class bingo_testing {
      * Método para cantar línea cuando hay 5 números que han salido
      * en algún cartón, este método solo se llama una vez por partida
      * para que solo salga una línea.
-     * @param cards
+     * @param arr
      * @return
      */
-    private static boolean checkLine(String[][][] cards) {
+    private static boolean checkLine(String[][][] arr) {
         int aux;
-        for (int x = 0; x < cards.length; x++) {
-            for (int y = 0; y < cards[x].length; y++) {
+        for (int x = 0; x < arr.length; x++) {
+            for (int y = 0; y < arr[x].length; y++) {
                 aux = 0;
-                for (int z = 0; z < cards[x][y].length; z++) {
+                for (int z = 0; z < arr[x][y].length; z++) {
                     if (aux < 5) {
-                        if (cards[x][y][z].equals(hyphen)) {
+                        if (arr[x][y][z].equals(hyphen)) {
                             aux++;
                         }
                         if (aux == 5) {
                             System.out.printf("%sThere is a LINE on card %s%s\n", BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, x + 1, ANSI_RESET);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Método para cantar bingo cuando hay 15 números que han salido
+     * en algún cartón, este método solo se llama una vez por partida
+     * para que solo salga un bingo.
+     * @param arr
+     * @return
+     */
+    private static boolean checkBingo(String[][][] arr) {
+        int aux;
+        for (int x = 0; x < arr.length; x++) {
+            aux = 0;
+            for (int y = 0; y < arr[x].length; y++) {
+                for (int z = 0; z < arr[x][y].length; z++) {
+                    if (aux < 15) {
+                        if (arr[x][y][z].equals(hyphen)) {
+                            aux++;
+                        }
+                        if (aux == 15) {
+                            System.out.println();
+                            System.out.printf("%sThere is a BINGO on card %s%s\n", BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, x + 1, ANSI_RESET);
                             return true;
                         }
                     }
