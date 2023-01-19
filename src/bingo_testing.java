@@ -152,7 +152,7 @@ public class bingo_testing {
                 }
             }
         }
-        if (aux > 1) System.out.println("You had this number in one of your cards,\nI mark it with a hyphen. " + YELLOW_BACKGROUND_BRIGHT + BLACK_BOLD + "[-]" + ANSI_RESET);
+        if (aux >= 1) System.out.println("You had this number in one of your cards,\nI mark it with a hyphen. " + YELLOW_BACKGROUND_BRIGHT + BLACK_BOLD + "[-]" + ANSI_RESET);
 
     }
 
