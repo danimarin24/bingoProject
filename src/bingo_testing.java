@@ -59,16 +59,18 @@ public class bingo_testing {
      */
     private static boolean game() {
         int cardsNumber, aux = 0;
-        String[][][] cards;
+        String[][][] cards, clonedCardsArr;
         int[][][] cardsColumns;
-        boolean checkLine = false, checkBingo = false;
+        boolean checkLine = false;
         int[] arrBomboNumbers = generateBomboArray(1, 90);
+        int[] clonedArrBomboNumbers;
 
         cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, 99);
         cards = new String[cardsNumber][3][9];
         cardsColumns = new int[cardsNumber][9][3];
 
         generateAllCards(cards, cardsColumns);
+        clonedCardsArr = cloneAllCards(cards);
 
         // start game with cards generated
         do { // only play if the user input 's', if not the game ends.
@@ -81,7 +83,10 @@ public class bingo_testing {
                 checkLine = checkLine(cards); // check line every time, until it is
             }
 
-            if (checkBingo(cards)) { // check bingo every time, until it is
+            if (checkBingo(cards, clonedCardsArr)) { // check bingo every time, until it is
+                clonedArrBomboNumbers = clonedArrBomboNumbers(aux, arrBomboNumbers);
+                System.out.println("This is the list of numbers that have come out of the draw:");
+                System.out.println(Arrays.toString(clonedArrBomboNumbers));
                 return true;
             }
 
@@ -89,6 +94,22 @@ public class bingo_testing {
             aux++;
         }while (Util.demanarChar("Next Number", 's', 'n') == 's');
         return false;
+    }
+
+    private static int[] clonedArrBomboNumbers(int aux, int[] arrBomboNumbers) {
+        int[] clonedArrBomboNumbers = new int[aux+1];
+        System.arraycopy(arrBomboNumbers, 0, clonedArrBomboNumbers, 0, clonedArrBomboNumbers.length);
+        return clonedArrBomboNumbers;
+    }
+
+    private static String[][][] cloneAllCards(String[][][] arr) {
+        String[][][] clonedArr = new String[arr.length][arr[0].length][arr[0][0].length];
+        for (int x = 0; x < clonedArr.length; x++) {
+            for (int y = 0; y < clonedArr[x].length; y++) {
+                System.arraycopy(arr[x][y], 0, clonedArr[x][y], 0, clonedArr[x][y].length);
+            }
+        }
+        return clonedArr;
     }
 
     /**
@@ -144,7 +165,7 @@ public class bingo_testing {
      * @param arr
      * @return
      */
-    private static boolean checkBingo(String[][][] arr) {
+    private static boolean checkBingo(String[][][] arr, String[][][] clonedArr) {
         int aux, auxBingo = 0;
         for (int x = 0; x < arr.length; x++) {
             aux = 0;
@@ -157,6 +178,7 @@ public class bingo_testing {
                         if (aux == 15) {
                             System.out.println();
                             System.out.printf("%sThere is a BINGO on card %s%s\n", BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, x + 1, ANSI_RESET);
+                            printCard(clonedArr[x]);
                             auxBingo++;
                         }
                     }
@@ -343,7 +365,7 @@ public class bingo_testing {
      * @param arr
      */
     private static void fillCardsAt(String[][][] arr) {
-        int counter = 0, atPosition;
+        int counter, atPosition;
 
         for (int x = 0; x < arr.length; x++) {
             for (int y = 0; y < arr[x].length; y++) {
@@ -389,6 +411,24 @@ public class bingo_testing {
             System.out.println();
         }
     }
+    private static void printCard(String[][] arr) {
+        System.out.println();
+
+        for (int x = 0; x < arr.length; x++) {
+            for (int y = 0; y < arr[x].length; y++) {
+                if (arr[x][y].equals(at)) {
+                    printColor(WHITE_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                } else if (arr[x][y].equals(hyphen)) {
+                    printColor(YELLOW_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                } else {
+                    printColor(RED_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
 
     /**
      * Método para imprimir por pantalla con colores de fondo
