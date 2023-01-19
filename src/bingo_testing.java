@@ -19,7 +19,10 @@ public class bingo_testing {
     public static boolean finished = false;
 
 
-    // Metode principal
+    /**
+     * Método principal
+     * @param args
+     */
     public static void main(String[] args) {
 
         game();
@@ -60,6 +63,12 @@ public class bingo_testing {
         } while (finished);
     }
 
+    /**
+     * Método para devolver la información del juego
+     * al que el usuario está jugando.
+     * En este caso el bingo, este método imprime un mensaje
+     * por pantalla.
+     */
     private static void getGameInfo() {
         System.out.printf("""
                         %s⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜%s
@@ -72,6 +81,19 @@ public class bingo_testing {
         );
     }
 
+    /**
+     * Método para ir imprimiendo los números del bombo
+     * a medida que el jugar quiere seguir jugando al bingo.
+     * Este método utiliza internamente tres métodos más
+     * método para generar los números del bombo en un array: {@link #generateBomboArray}
+     * método para imprimir los cartones actuales: {@link #printCards}
+     * método para buscar si el número actual se encuentra en
+     * un cartón, y sustituirlo: {@link #searchAndReplaceValue}
+     * @param min
+     * @param max
+     * @param cards
+     * @param cardsColumns
+     */
     private static void getBomboNumbers(int min, int max, String[][][] cards, int[][][] cardsColumns) {
         int aux = 0;
         int[] arrBomboNumbers = generateBomboArray(min, max);
@@ -135,6 +157,13 @@ public class bingo_testing {
         return bomboNumbers;
     }
 
+    /**
+     * Método que genera todos los cartones a través de diferentes
+     * métodos como {@link #getRandomValues}, {@link #sortCards},
+     * {@link #fillCardsSorted} y {@link #fillCardsAt}
+     * @param cards
+     * @param cardsColumns
+     */
     private static void generateAllCards(String[][][] cards, int[][][] cardsColumns) {
         getRandomValues(cards, cardsColumns);
         sortCards(cards, cardsColumns);
@@ -142,6 +171,14 @@ public class bingo_testing {
         fillCardsAt(cards);
     }
 
+    /**
+     * Método para generar números Random y que no se repitan
+     * a través del método {@link #checkRandomNumberBiArr},
+     * este método va metiendo todos los números no repetidos
+     * en un arreglo de [numero de cartones] x 9 x 3
+     * @param cards
+     * @param cardsColumns
+     */
     private static void getRandomValues(String[][][] cards, int[][][] cardsColumns) {
         int aux, minRange, maxRange, range, randomNum;
         boolean checked;
@@ -166,7 +203,13 @@ public class bingo_testing {
         }
     }
 
-    // RELLENAR EL ARRAY DE STRINGS
+    /**
+     * Método para sustituir el array de integers por un array
+     * de strings, además el valor que pertenece a la columna x,
+     * pasa a pertenecer a la columna y.
+     * @param cards
+     * @param cardsColumns
+     */
     private static void fillCardsSorted(String[][][] cards, int[][][] cardsColumns) {
         for (int x = 0; x < cards.length; x++) {
             for (int y = 0; y < cards[x].length; y++) {
@@ -178,7 +221,13 @@ public class bingo_testing {
 
     }
 
-    // ORDENAR LOS CARTONES
+    /**
+     * Método para ordenar todos los cartones por columnas,
+     * para así tener ordenados los cartones de menor a mayor
+     * y de arriba a abajo, de izquierda a derecha.
+     * @param cards
+     * @param cardsColumns
+     */
     private static void sortCards(String[][][] cards, int[][][] cardsColumns) {
         for (int x = 0; x < cards.length; x++) {
             for (int y = 0; y < cards[x].length; y++) {
@@ -189,7 +238,14 @@ public class bingo_testing {
         }
     }
 
-    // REVISAR NUMERO REPETIDO ARRAY BIDIMENSIONAL
+    /**
+     * Método utilizado para revisar que un número no se encuentra repetido
+     * en un array bi dimensional (de dos dimensiones).
+     * Si se encuentra repetido devolverá true, si no false.
+     * @param num
+     * @param arr
+     * @return boolean
+     */
     private static boolean checkRandomNumberBiArr(int num, int[][] arr) {
         boolean repeated = false;
 
@@ -205,7 +261,14 @@ public class bingo_testing {
         return repeated;
     }
 
-    // REVISAR NUMERO REPETIDO ARRAY UNIDIMENSIONAL
+    /**
+     * Método utilizado para revisar que un número no se encuentra repetido
+     * en un array uni dimensional (de una dimension).
+     * Si se encuentra repetido devolverá true, si no false.
+     * @param num
+     * @param arr
+     * @return boolean
+     */
     private static boolean checkRandomNumberArr(int num, int[] arr) {
         boolean repeated = false;
 
