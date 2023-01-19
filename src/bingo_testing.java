@@ -91,6 +91,10 @@ public class bingo_testing {
         return false;
     }
 
+    private static String[][][] cloneAllCards(String[][][] arr) {
+        return arr;
+    }
+
     /**
      * Método para devolver la información del juego
      * al que el usuario está jugando.
@@ -157,6 +161,7 @@ public class bingo_testing {
                         if (aux == 15) {
                             System.out.println();
                             System.out.printf("%sThere is a BINGO on card %s%s\n", BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, x + 1, ANSI_RESET);
+                            printCard(cloneAllCards(arr)[x]);
                             auxBingo++;
                         }
                     }
@@ -389,6 +394,27 @@ public class bingo_testing {
             System.out.println();
         }
     }
+    private static void printCard(String[][] arr) {
+        System.out.println();
+
+        for (int x = 0; x < arr.length; x++) {
+            System.out.printf("%4s ", (x+1) + ".");
+            for (int y = 0; y < arr[x].length; y++) {
+                    if (x == 1 && y == 0) System.out.printf("%4s ", ' ');
+                    if (x == 2 && y == 0) System.out.printf("%4s ", ' ');
+                    if (arr[x][y].equals(at)) {
+                        printColor(WHITE_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                    } else if (arr[x][y].equals(hyphen)) {
+                        printColor(YELLOW_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                    } else {
+                        printColor(RED_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                    }
+                }
+                System.out.println();
+            }
+            System.out.println();
+    }
+
 
     /**
      * Método para imprimir por pantalla con colores de fondo
