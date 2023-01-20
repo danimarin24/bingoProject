@@ -1,6 +1,6 @@
-import java.util.*;
+import java.util.Arrays;
 
-public class bingo_testing {
+public class bingo_testingMoney {
     public static final String ANSI_RESET="\u001B[0m";
     public static final String RED_BOLD = "\033[1;31m";    // RED
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
@@ -64,8 +64,14 @@ public class bingo_testing {
         boolean checkLine = false;
         int[] arrBomboNumbers = generateBomboArray(1, 90);
         int[] clonedArrBomboNumbers;
+        int actualMoney = 200;
+        int maxCards = actualMoney / 50;
+        getGameMoneyInfo(actualMoney);
 
-        cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, 99);
+        cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, maxCards);
+        actualMoney = actualMoney - (50 * cardsNumber);
+        System.out.printf("You have %s$%s%s%d%s money. || Each card cost %s$%s%s%d%s\n", GREEN_BOLD,ANSI_RESET,BLUE_BOLD,actualMoney,ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,50,ANSI_RESET);
+
         cards = new String[cardsNumber][3][9];
         cardsColumns = new int[cardsNumber][9][3];
 
@@ -94,6 +100,44 @@ public class bingo_testing {
             aux++;
         }while (Util.demanarChar("Next Number", 's', 'n') == 's');
         return false;
+    }
+
+    private static void getGameMoneyInfo(int money) {
+        int cartonPrice = 50;
+        System.out.printf("""
+                        %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s
+                        %s╋╋╋ %s%sBANCO%s %s╋╋╋%s
+                        %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s
+                        """,
+                CYAN_BOLD, ANSI_RESET,
+                RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET,
+                CYAN_BOLD, ANSI_RESET
+        );
+        System.out.printf("You have %s$%s%s%d%s money. || Each card cost %s$%s%s%d%s\n", GREEN_BOLD,ANSI_RESET,BLUE_BOLD,money,ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,cartonPrice,ANSI_RESET);
+        getBingoInfo();
+    }
+
+    private static void getBingoInfo() {
+        System.out.printf("""
+                        %s```%s
+                           %sIf you don't BINGO before 65 numbers have been displayed,%s
+                           %syou lose %s%s $ %s%s 5 %s%s of the prize for each number displayed %s
+                           %safter that. %s%sTHE PRIZE IS %s%s $ %s%s 200 %s%s IF YOU WON. %s
+                        %s```%s
+                        """,
+                RED_BOLD, ANSI_RESET,
+                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                GREEN_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                RED_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                PURPLE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                GREEN_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                PURPLE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
+                RED_BOLD, ANSI_RESET
+        );
     }
 
     private static int[] clonedArrBomboNumbers(int aux, int[] arrBomboNumbers) {
