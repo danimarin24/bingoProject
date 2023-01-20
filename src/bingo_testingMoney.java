@@ -25,6 +25,8 @@ public class bingo_testingMoney {
     public static final String hyphen = "—";
 
     public static boolean finished = false;
+    public static int cartonPrice = 50;
+    public static int[] gameStats = new int[2];
 
 
     /**
@@ -34,9 +36,18 @@ public class bingo_testingMoney {
     public static void main(String[] args) {
         // PRINT WELCOME MESSAGE
         getGameInfo();
+        gameStats[1] = 50; // initial money bank to $200.
         do {
             if (Util.demanarChar("Do you want to play bingo?", 's', 'n') == 's') {
-                finished = game();
+                finished = gameStats[0] == 1;
+                System.out.println("finished = " + finished);
+                System.out.println("gameStats = " + gameStats[1]);
+                if (gameStats[0] == 2) {
+                    System.out.println("Your game has just end. Because you don't have enough money to buy one card!");
+                    getActualMoneyInfo(gameStats[1], cartonPrice);
+                    finished = false;
+                }
+                gameStats = game(gameStats[1]);
             } else { // if the user input 'n', the game ends
                 System.out.println("BYE!! See u soon :D");
                 finished = false;
@@ -49,6 +60,7 @@ public class bingo_testingMoney {
      * en este método comienzan todas las llamadas
      * a todos los métodos que hay en esta clase.
      * Este método utiliza internamente estos métodos
+     *
      * @method {@link Util#demanarChar}
      * @method {@link Util#demanarIntegerMinMax}
      * @method {@link #generateAllCards}
@@ -57,20 +69,21 @@ public class bingo_testingMoney {
      * @method {@link #checkLine}
      * @method {@link #searchAndReplaceValue}
      */
-    private static boolean game() {
+    private static int[] game(int actualMoney) {
         int cardsNumber, aux = 0;
         String[][][] cards, clonedCardsArr;
         int[][][] cardsColumns;
         boolean checkLine = false;
         int[] arrBomboNumbers = generateBomboArray(1, 90);
-        int[] clonedArrBomboNumbers;
-        int actualMoney = 200;
-        int maxCards = actualMoney / 50;
+        int[] clonedArrBomboNumbers, gameInfo = new int[2];
+        int totalMoneyWon, moneyWon, totalMoneyLess, moneyLessNumber = 5, totalMoney;
+        int maxCards = actualMoney / cartonPrice;
         getGameMoneyInfo(actualMoney);
 
         cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, maxCards);
-        actualMoney = actualMoney - (50 * cardsNumber);
-        System.out.printf("You have %s$%s%s%d%s money. || Each card cost %s$%s%s%d%s\n", GREEN_BOLD,ANSI_RESET,BLUE_BOLD,actualMoney,ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,50,ANSI_RESET);
+        actualMoney = actualMoney - (cartonPrice * cardsNumber);
+        getActualMoneyInfo(actualMoney, cartonPrice);
+
 
         cards = new String[cardsNumber][3][9];
         cardsColumns = new int[cardsNumber][9][3];
@@ -93,17 +106,26 @@ public class bingo_testingMoney {
                 clonedArrBomboNumbers = clonedArrBomboNumbers(aux, arrBomboNumbers);
                 System.out.println("This is the list of numbers that have come out of the draw:");
                 System.out.println(Arrays.toString(clonedArrBomboNumbers));
-                return true;
+                moneyWon = 200;
+                totalMoneyLess = (aux - 55) < 0 ? 0 : (aux - 55) * moneyLessNumber;
+                totalMoneyWon = moneyWon - totalMoneyLess;
+                System.out.printf("Has hecho BINGO en la bola %d, por lo tanto te llevas: $%d\n", aux, totalMoneyWon);
+                gameInfo[0] = 1;
+                totalMoney = totalMoneyWon + actualMoney;
+                gameInfo[1] = totalMoney;
+                if (totalMoney < cartonPrice) {
+                    gameInfo[0] = 2; // 2 is for indicate that this user can't play because he/she doesn't have enough money.
+                }
+                return gameInfo;
             }
 
             // incrementar posición del nuevo número del bombo;
             aux++;
         }while (Util.demanarChar("Next Number", 's', 'n') == 's');
-        return false;
+        return gameInfo;
     }
 
     private static void getGameMoneyInfo(int money) {
-        int cartonPrice = 50;
         System.out.printf("""
                         %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s
                         %s╋╋╋ %s%sBANCO%s %s╋╋╋%s
@@ -113,14 +135,19 @@ public class bingo_testingMoney {
                 RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET,
                 CYAN_BOLD, ANSI_RESET
         );
-        System.out.printf("You have %s$%s%s%d%s money. || Each card cost %s$%s%s%d%s\n", GREEN_BOLD,ANSI_RESET,BLUE_BOLD,money,ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,cartonPrice,ANSI_RESET);
+        getActualMoneyInfo(money, cartonPrice);
         getBingoInfo();
+    }
+
+    private static void getActualMoneyInfo(int money, int cartonPrice) {
+        System.out.printf("You have %s$%s%s%d%s money. || Each card cost %s$%s%s%d%s\n", GREEN_BOLD,ANSI_RESET,BLUE_BOLD,money,ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,cartonPrice,ANSI_RESET);
+
     }
 
     private static void getBingoInfo() {
         System.out.printf("""
                         %s```%s
-                           %sIf you don't BINGO before 65 numbers have been displayed,%s
+                           %sIf you don't BINGO before 55 numbers have been displayed,%s
                            %syou lose %s%s $ %s%s 5 %s%s of the prize for each number displayed %s
                            %safter that. %s%sTHE PRIZE IS %s%s $ %s%s 200 %s%s IF YOU WON. %s
                         %s```%s
