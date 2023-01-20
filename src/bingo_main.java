@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class bingo_testing {
+public class bingo_main {
     public static final String ANSI_RESET="\u001B[0m";
     public static final String RED_BOLD = "\033[1;31m";    // RED
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
