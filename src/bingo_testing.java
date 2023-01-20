@@ -411,6 +411,16 @@ public class bingo_testing {
             System.out.println();
         }
     }
+
+    /**
+     * Método para imprimir los cartones ganadores de bingo,
+     * en vez de recibir un array tridimensional, lo recibe
+     * bidimensional, ya que solo va a mostrar el resultado de un cartón
+     * por bingo ganador, en el caso de que haya más de uno.
+     * Dentro del método se llama al método {@linkplain  #printColor},
+     * para estilizar los cartones.
+     * @param arr
+     */
     private static void printCard(String[][] arr) {
         System.out.println();
 
