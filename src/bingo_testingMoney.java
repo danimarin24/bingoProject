@@ -39,15 +39,13 @@ public class bingo_testingMoney {
         gameStats[1] = 50; // initial money bank to $200.
         do {
             if (Util.demanarChar("Do you want to play bingo?", 's', 'n') == 's') {
+                gameStats = game(gameStats[1]);
                 finished = gameStats[0] == 1;
-                System.out.println("finished = " + finished);
-                System.out.println("gameStats = " + gameStats[1]);
-                if (gameStats[0] == 2) {
+                if (gameStats[0] == 2) { // not money
                     System.out.println("Your game has just end. Because you don't have enough money to buy one card!");
                     getActualMoneyInfo(gameStats[1], cartonPrice);
                     finished = false;
                 }
-                gameStats = game(gameStats[1]);
             } else { // if the user input 'n', the game ends
                 System.out.println("BYE!! See u soon :D");
                 finished = false;
