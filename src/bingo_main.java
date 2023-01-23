@@ -66,7 +66,8 @@ public class bingo_main {
             if (checkBingo(cards, clonedCardsArr)) { // check bingo every time, until it is
                 clonedArrBomboNumbers = clonedArrBomboNumbers(aux, arrBomboNumbers);
                 System.out.println("This is the list of numbers that have come out of the draw:");
-                System.out.println(Arrays.toString(clonedArrBomboNumbers));
+                printBomboNumbers(clonedArrBomboNumbers, cards);
+                System.out.println();
                 return true;
             }
 
@@ -90,6 +91,13 @@ public class bingo_main {
             }
         }
         return clonedArr;
+    }
+
+    private static void printBomboNumbers(int[] clonedArrBomboNumbers, String[][][] arr) {
+        for (int i = 0; i < clonedArrBomboNumbers.length; i++) {
+            System.out.printf(i % 12 == 0 ? "\n %2d | " : "%2d | ", clonedArrBomboNumbers[i], clonedArrBomboNumbers[i]);
+        }
+        //System.out.println(Arrays.toString(clonedArrBomboNumbers));
     }
 
     /**
