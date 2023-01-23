@@ -21,20 +21,20 @@ It has been created completely from scratch, with the creation of different meth
 
 <!-- ROADMAP -->
 ## Roadmap
-- [ ] Add a method to ask the number of cartons to play. [not specified]
+- [x] Add a method to ask the number of cartons to play. [not specified]
 - [x] Add an array with 3 rows and 9 columns x bingo card. [not specified]
 - [x] Add a method to fill all the rows with 4 zeros randomly. [not specified]
 - [x] Add a method to print bingo cards into the terminal. [1.5 points]
-- [ ] Add a method to draw balls from 1 to 90, and check if that number (ball) is in any of the cards, if so, put a dash. [1.5 points]
-- [ ] Add a method to check if the cards have a bingo, and print it by terminal. Also, print all the numbers that have been coming up. [1 point]
-- [ ] Add a question every time a number is drawn. [1 points]
-- [ ] Improvements [TOTAL: 5 extra points]
+- [x] Add a method to draw balls from 1 to 90, and check if that number (ball) is in any of the cards, if so, put a dash. [1.5 points]
+- [x] Add a method to check if the cards have a bingo, and print it by terminal. Also, print all the numbers that have been coming up. [1 point]
+- [x] Add a question every time a number is drawn. [1 points]
+- [x] Improvements [TOTAL: 5 extra points]
   - [x] Replace randomly generated zeros by a '@'. [0.5 points]
   - [ ] Add a method to display all the numbers that have been drawn, and display those that have matched the winning card. [0.5 points]
   - [ ] Add a method to check if the cartons have a line, and print it per terminal, only once. [1 point]
   - [x] All cards must have 5 numbers and 4 holes per row. [1.5 points]
   - [x] The player can play with 2 or more cards at the same time. [1.5 points]
-- [ ] Create all documentation and generate the JavaDoc. [not specified]
+- [x] Create all documentation and generate the JavaDoc. [not specified]
 
 
 <!-- CONTACT -->
@@ -48,12 +48,10 @@ Project Link: [https://github.com/danimarin24/bingoProject](https://github.com/d
 ## Acknowledgments
 
 In this section I will leave websites that have been useful to me when creating this project, and any resource that I have found interesting, and has helped me.
-* [-](https://)
-* [-](https://)
-* [-](https://)
-* [-](https://)
-* [-](https://)
-* [-](https://)
+* [Java Colors](https://www.w3schools.blog/ansi-colors-java)
+* [Arrays.Sort](https://www.geeksforgeeks.org/arrays-sort-in-java-with-examples/)
+* [Generate Random Numbers](https://www.w3api.com/Java/Math/random/)
+* [Some example of tridimensional arrays](https://www.programiz.com/java-programming/multidimensional-array)
 
 [contributors-shield]: https://img.shields.io/github/contributors/danimarin24/bingoProject?color=green&style=for-the-badge
 [contributors-url]: https://github.com/danimarin24/bingoProject/graphs/contributors
