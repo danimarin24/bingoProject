@@ -32,7 +32,7 @@ public class bingo_testingMoney {
     public static void main(String[] args) {
         // PRINT WELCOME MESSAGE
         getGameInfo();
-        gameStats[1] = 50; // initial money bank to $200.
+        gameStats[1] = 200; // initial money bank to $200.
         do {
             if (Util.demanarChar("Do you want to play bingo?", 's', 'n') == 's') {
                 System.out.println(); // initial break, to generate a separation in terminal.
@@ -100,8 +100,9 @@ public class bingo_testingMoney {
 
             if (checkBingo(cards, clonedCardsArr)) { // check bingo every time, until it is
                 clonedArrBomboNumbers = clonedArrBomboNumbers(aux, arrBomboNumbers);
-                System.out.println("This is the list of numbers that have come out of the draw:");
-                System.out.println(Arrays.toString(clonedArrBomboNumbers));
+                System.out.print("This is the list of numbers that have come out of the draw:");
+                printBomboNumbers(clonedArrBomboNumbers, cards);
+
                 moneyWon = 200;
                 totalMoneyLess = (aux - 55) < 0 ? 0 : (aux - 55) * moneyLessNumber;
                 totalMoneyWon = moneyWon - totalMoneyLess;
@@ -122,6 +123,13 @@ public class bingo_testingMoney {
             aux++;
         }while (Util.demanarChar("Next Number", 's', 'n') == 's');
         return gameInfo;
+    }
+
+    private static void printBomboNumbers(int[] clonedArrBomboNumbers, String[][][] arr) {
+        for (int i = 0; i < clonedArrBomboNumbers.length; i++) {
+            System.out.printf(i % 12 == 0 ? "\n %2d | " : "%2d | ", clonedArrBomboNumbers[i], clonedArrBomboNumbers[i]);
+        }
+        //System.out.println(Arrays.toString(clonedArrBomboNumbers));
     }
 
     private static void getGameMoneyInfo(int money) {
