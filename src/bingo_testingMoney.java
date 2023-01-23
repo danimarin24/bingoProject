@@ -1,21 +1,6 @@
 import java.util.Arrays;
 
 public class bingo_testingMoney {
-    public static final String ANSI_RESET="\u001B[0m";
-    public static final String RED_BOLD = "\033[1;31m";    // RED
-    public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
-    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
-    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
-    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
-
-    public static final String RED_BACKGROUND_BRIGHT = "\033[0;101m";// RED
-    public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
-    public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";// YELLOW
-    public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
-    public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
-    public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHIT
-
 
     public static final String at = "@";
     public static final String hyphen = "—";
@@ -78,7 +63,7 @@ public class bingo_testingMoney {
 
         cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, maxCards);
         actualMoney = actualMoney - (cartonPrice * cardsNumber);
-        System.out.printf("Now you have %s$%s%s%d%s, at stake you have %s$%s%s%d%s (%d cards)\n", GREEN_BOLD, ANSI_RESET, BLUE_BOLD,actualMoney, ANSI_RESET, GREEN_BOLD, ANSI_RESET, BLUE_BOLD,cartonPrice * cardsNumber, ANSI_RESET, cardsNumber);
+        System.out.printf("Now you have %s$%s%s%d%s, at stake you have %s$%s%s%d%s (%d cards)\n", ConsoleColors.GREEN_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.BLUE_BOLD,actualMoney, ConsoleColors.ANSI_RESET, ConsoleColors.GREEN_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.BLUE_BOLD,cartonPrice * cardsNumber, ConsoleColors.ANSI_RESET, cardsNumber);
 
 
         cards = new String[cardsNumber][3][9];
@@ -91,7 +76,7 @@ public class bingo_testingMoney {
         do { // only play if the user input 's', if not the game ends.
             printCards(cards); // print cards every time
 
-            System.out.printf("%sNew number: %d%s\n", GREEN_BACKGROUND_BRIGHT + BLACK_BOLD, arrBomboNumbers[aux], ANSI_RESET);
+            System.out.printf("%sNew number: %d%s\n", ConsoleColors.GREEN_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, arrBomboNumbers[aux], ConsoleColors.ANSI_RESET);
 
             searchAndReplaceValue(arrBomboNumbers[aux], cards); // change number value with a hyphen every time
             if (!checkLine) {
@@ -107,7 +92,7 @@ public class bingo_testingMoney {
                 totalMoneyLess = (aux - 55) < 0 ? 0 : (aux - 55) * moneyLessNumber;
                 totalMoneyWon = moneyWon - totalMoneyLess;
 
-                System.out.printf("\nYOU WON %s$%s%s%d%s BECAUSE YOU MADE BINGO ON THE %d BALL\n\n",  GREEN_BOLD,ANSI_RESET,BLUE_BOLD,totalMoneyWon,ANSI_RESET, aux);
+                System.out.printf("\nYOU WON %s$%s%s%d%s BECAUSE YOU MADE BINGO ON THE %d BALL\n\n",  ConsoleColors.GREEN_BOLD,ConsoleColors.ANSI_RESET,ConsoleColors.BLUE_BOLD,totalMoneyWon,ConsoleColors.ANSI_RESET, aux);
 
                 gameInfo[0] = 1;
                 totalMoney = totalMoneyWon + actualMoney;
@@ -138,15 +123,15 @@ public class bingo_testingMoney {
                         %s╋╋%s%s╋╋╋ %s%sBANCO%s %s╋╋╋%s%s╋╋%s %s╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋%s
                         %s╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋%s Each card cost %s$%s%s%d%s.
                         """,
-                CYAN_BOLD, ANSI_RESET, GREEN_BOLD,ANSI_RESET,BLUE_BOLD,money,ANSI_RESET,
-                CYAN_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET, CYAN_BOLD, ANSI_RESET, CYAN_BOLD, ANSI_RESET,
-                CYAN_BOLD, ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,cartonPrice,ANSI_RESET
+                ConsoleColors.CYAN_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.GREEN_BOLD,ConsoleColors.ANSI_RESET,ConsoleColors.BLUE_BOLD,money,ConsoleColors.ANSI_RESET,
+                ConsoleColors.CYAN_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.RED_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.YELLOW_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.RED_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.CYAN_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.CYAN_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.CYAN_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.GREEN_BOLD,ConsoleColors.ANSI_RESET,ConsoleColors.RED_BOLD,cartonPrice,ConsoleColors.ANSI_RESET
         );
         getBingoInfo();
     }
 
     private static void getActualMoneyInfo(int money, int cartonPrice) {
-        System.out.printf("You have %s$%s%s%d%s money. || Each card cost %s$%s%s%d%s\n", GREEN_BOLD,ANSI_RESET,BLUE_BOLD,money,ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,cartonPrice,ANSI_RESET);
+        System.out.printf("You have %s$%s%s%d%s money. || Each card cost %s$%s%s%d%s\n", ConsoleColors.GREEN_BOLD,ConsoleColors.ANSI_RESET,ConsoleColors.BLUE_BOLD,money,ConsoleColors.ANSI_RESET, ConsoleColors.GREEN_BOLD,ConsoleColors.ANSI_RESET,ConsoleColors.RED_BOLD,cartonPrice,ConsoleColors.ANSI_RESET);
 
     }
 
@@ -158,18 +143,18 @@ public class bingo_testingMoney {
                            %safter that. %s%sTHE PRIZE IS %s%s $ %s%s 200 %s%s IF YOU WON. %s
                         %s```%s
                         """,
-                RED_BOLD, ANSI_RESET,
-                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                GREEN_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                RED_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                WHITE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                PURPLE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                GREEN_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                PURPLE_BACKGROUND_BRIGHT + BLACK_BOLD, ANSI_RESET,
-                RED_BOLD, ANSI_RESET
+                ConsoleColors.RED_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.GREEN_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.RED_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.PURPLE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.GREEN_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.BLUE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.PURPLE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.RED_BOLD, ConsoleColors.ANSI_RESET
         );
     }
 
@@ -201,9 +186,9 @@ public class bingo_testingMoney {
                         %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s %sBINGO%s %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s
                         %s⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜%s
                         """,
-                CYAN_BOLD, ANSI_RESET,
-                RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET,
-                CYAN_BOLD, ANSI_RESET
+                ConsoleColors.CYAN_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.RED_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.YELLOW_BOLD, ConsoleColors.ANSI_RESET, ConsoleColors.RED_BOLD, ConsoleColors.ANSI_RESET,
+                ConsoleColors.CYAN_BOLD, ConsoleColors.ANSI_RESET
         );
     }
 
@@ -225,7 +210,7 @@ public class bingo_testingMoney {
                             aux++;
                         }
                         if (aux == 5) {
-                            System.out.printf("%sThere is a LINE on card %s%s\n", BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, x + 1, ANSI_RESET);
+                            System.out.printf("%sThere is a LINE on card %s%s\n", ConsoleColors.BLUE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, x + 1, ConsoleColors.ANSI_RESET);
                             return true;
                         }
                     }
@@ -254,7 +239,7 @@ public class bingo_testingMoney {
                         }
                         if (aux == 15) {
                             System.out.println();
-                            System.out.printf("%sThere is a BINGO on card %s%s\n", BLUE_BACKGROUND_BRIGHT + BLACK_BOLD, x + 1, ANSI_RESET);
+                            System.out.printf("%sThere is a BINGO on card %s%s\n", ConsoleColors.BLUE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD, x + 1, ConsoleColors.ANSI_RESET);
                             printCard(clonedArr[x]);
                             auxBingo++;
                         }
@@ -284,7 +269,7 @@ public class bingo_testingMoney {
                 }
             }
         }
-        if (aux >= 1) System.out.println("You had this number in one of your cards,\nI mark it with a hyphen. " + YELLOW_BACKGROUND_BRIGHT + BLACK_BOLD + "[-]" + ANSI_RESET);
+        if (aux >= 1) System.out.println("You had this number in one of your cards,\nI mark it with a hyphen. " + ConsoleColors.YELLOW_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "[-]" + ConsoleColors.ANSI_RESET);
 
     }
 
@@ -476,11 +461,11 @@ public class bingo_testingMoney {
                     if (y == 1 && z == 0) System.out.printf("%4s ", ' ');
                     if (y == 2 && z == 0) System.out.printf("%4s ", ' ');
                     if (arr[x][y][z].equals(at)) {
-                        printColor(WHITE_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y][z]);
+                        printColor(ConsoleColors.WHITE_BACKGROUND_BRIGHT, ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET, arr[x][y][z]);
                     } else if (arr[x][y][z].equals(hyphen)) {
-                        printColor(YELLOW_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y][z]);
+                        printColor(ConsoleColors.YELLOW_BACKGROUND_BRIGHT, ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET, arr[x][y][z]);
                     } else {
-                        printColor(RED_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y][z]);
+                        printColor(ConsoleColors.RED_BACKGROUND_BRIGHT, ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET, arr[x][y][z]);
                     }
                 }
                 System.out.println();
@@ -504,11 +489,11 @@ public class bingo_testingMoney {
         for (int x = 0; x < arr.length; x++) {
             for (int y = 0; y < arr[x].length; y++) {
                 if (arr[x][y].equals(at)) {
-                    printColor(WHITE_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                    printColor(ConsoleColors.WHITE_BACKGROUND_BRIGHT, ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET, arr[x][y]);
                 } else if (arr[x][y].equals(hyphen)) {
-                    printColor(YELLOW_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                    printColor(ConsoleColors.YELLOW_BACKGROUND_BRIGHT, ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET, arr[x][y]);
                 } else {
-                    printColor(RED_BACKGROUND_BRIGHT, BLACK_BOLD, ANSI_RESET, arr[x][y]);
+                    printColor(ConsoleColors.RED_BACKGROUND_BRIGHT, ConsoleColors.BLACK_BOLD, ConsoleColors.ANSI_RESET, arr[x][y]);
                 }
             }
             System.out.println();
