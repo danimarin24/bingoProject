@@ -7,24 +7,20 @@ public class bingo_testingMoney {
     public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
     public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
     public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
-    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
     public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
-    public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
 
-    public static final String BLACK_BACKGROUND_BRIGHT = "\033[0;100m";// BLACK
     public static final String RED_BACKGROUND_BRIGHT = "\033[0;101m";// RED
     public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
     public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";// YELLOW
     public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
     public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
-    public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHIT
 
 
     public static final String at = "@";
     public static final String hyphen = "—";
 
-    public static boolean finished = false;
+    public static boolean finished = true;
     public static int cartonPrice = 50;
     public static int[] gameStats = new int[2];
 
@@ -39,18 +35,20 @@ public class bingo_testingMoney {
         gameStats[1] = 50; // initial money bank to $200.
         do {
             if (Util.demanarChar("Do you want to play bingo?", 's', 'n') == 's') {
-                gameStats = game(gameStats[1]);
-                finished = gameStats[0] == 1;
-                if (gameStats[0] == 2) { // not money
+                System.out.println(); // initial break, to generate a separation in terminal.
+                gameStats = game(gameStats[1]); // start game, with initial money bank, assigned before.
+                finished = gameStats[0] == 0;
+                if (gameStats[0] == 2) { // not enough money
                     System.out.println("Your game has just end. Because you don't have enough money to buy one card!");
                     getActualMoneyInfo(gameStats[1], cartonPrice);
-                    finished = false;
+                    System.out.printf("Insufficient founds, min to play: %d\n", cartonPrice);
+                    finished = true;
                 }
             } else { // if the user input 'n', the game ends
                 System.out.println("BYE!! See u soon :D");
-                finished = false;
+                finished = true;
             }
-        } while (finished);
+        } while (!finished);
     }
 
     /**
@@ -80,7 +78,7 @@ public class bingo_testingMoney {
 
         cardsNumber = Util.demanarIntegerMinMax("Number of cards to be played: ", 1, maxCards);
         actualMoney = actualMoney - (cartonPrice * cardsNumber);
-        getActualMoneyInfo(actualMoney, cartonPrice);
+        System.out.printf("Now you have %s$%s%s%d%s, at stake you have %s$%s%s%d%s (%d cards)\n", GREEN_BOLD, ANSI_RESET, BLUE_BOLD,actualMoney, ANSI_RESET, GREEN_BOLD, ANSI_RESET, BLUE_BOLD,cartonPrice * cardsNumber, ANSI_RESET, cardsNumber);
 
 
         cards = new String[cardsNumber][3][9];
@@ -107,10 +105,13 @@ public class bingo_testingMoney {
                 moneyWon = 200;
                 totalMoneyLess = (aux - 55) < 0 ? 0 : (aux - 55) * moneyLessNumber;
                 totalMoneyWon = moneyWon - totalMoneyLess;
-                System.out.printf("Has hecho BINGO en la bola %d, por lo tanto te llevas: $%d\n", aux, totalMoneyWon);
+
+                System.out.printf("\nYOU WON %s$%s%s%d%s BECAUSE YOU MADE BINGO ON THE %d BALL\n\n",  GREEN_BOLD,ANSI_RESET,BLUE_BOLD,totalMoneyWon,ANSI_RESET, aux);
+
                 gameInfo[0] = 1;
                 totalMoney = totalMoneyWon + actualMoney;
                 gameInfo[1] = totalMoney;
+
                 if (totalMoney < cartonPrice) {
                     gameInfo[0] = 2; // 2 is for indicate that this user can't play because he/she doesn't have enough money.
                 }
@@ -125,15 +126,14 @@ public class bingo_testingMoney {
 
     private static void getGameMoneyInfo(int money) {
         System.out.printf("""
-                        %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s
-                        %s╋╋╋ %s%sBANCO%s %s╋╋╋%s
-                        %s╋╋╋╋╋╋╋╋╋╋╋╋╋%s
+                        %s╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋%s You have %s$%s%s%d%s money.
+                        %s╋╋%s%s╋╋╋ %s%sBANCO%s %s╋╋╋%s%s╋╋%s %s╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋%s
+                        %s╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋%s Each card cost %s$%s%s%d%s.
                         """,
-                CYAN_BOLD, ANSI_RESET,
-                RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET,
-                CYAN_BOLD, ANSI_RESET
+                CYAN_BOLD, ANSI_RESET, GREEN_BOLD,ANSI_RESET,BLUE_BOLD,money,ANSI_RESET,
+                CYAN_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET, YELLOW_BOLD, ANSI_RESET, RED_BOLD, ANSI_RESET, CYAN_BOLD, ANSI_RESET, CYAN_BOLD, ANSI_RESET,
+                CYAN_BOLD, ANSI_RESET, GREEN_BOLD,ANSI_RESET,RED_BOLD,cartonPrice,ANSI_RESET
         );
-        getActualMoneyInfo(money, cartonPrice);
         getBingoInfo();
     }
 
